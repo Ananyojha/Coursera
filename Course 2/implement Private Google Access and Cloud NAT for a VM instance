@@ -1,0 +1,4 @@
+gcloud compute networks create privatenet \
+    --subnet-mode=custom \
+    --bgp-routing-mode=DYNAMIC_ROUTING_MODE \
+    --mtu=MTU
