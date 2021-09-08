@@ -2,3 +2,19 @@ gcloud compute networks create privatenet \
     --subnet-mode=custom \
     --bgp-routing-mode=DYNAMIC_ROUTING_MODE \
     --mtu=MTU
+
+gcloud compute networks subnets create privatenet-us \
+    --network=privatenet \
+    --range=10.130.0.0/20 \
+    --region=us-central1
+
+#add firewall rule manually
+
+gcloud compute instances create vm-internal \
+    [--image=debian10 | --image-family=debian-10] \
+    --machine-type=n1-standard-1
+    --zone=us-central1-c
+    [--network-interface
+        [network=privatenet,subnet=privatenet-us],
+        [address=no-address]
+    ...]
